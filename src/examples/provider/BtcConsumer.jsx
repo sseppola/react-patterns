@@ -7,7 +7,6 @@ import { LoadingIndicator } from '../../components/LoadingIndicator'
 import btcIndexPropType from '../../propTypes/btcIndexPropType'
 
 
-
 export default class BtcProvderChild extends React.Component {
   render() {
     if (this.context.btcIndex.loading && !this.context.btcIndex.loaded) {
@@ -16,17 +15,19 @@ export default class BtcProvderChild extends React.Component {
     if (this.context.btcIndex.error) {
       return <ErrorDisplay message={this.context.btcIndex.errorMsg} />
     }
-    if (!this.context.btcIndex.loaded) {
-      return null
+    if (this.context.btcIndex.loaded) {
+      const [buy, sell] = this.context.btcIndex.value
+      return (
+        <DisplayBtcPrice
+          buy={buy}
+          sell={sell}
+          loading={this.context.btcIndex.loading}
+          refresh={this.context.btcIndex.reload}
+        />
+      )
     }
 
-    return (
-      <DisplayBtcPrice
-        buy={this.context.btcIndex.buy}
-        sell={this.context.btcIndex.sell}
-        onClick={this.context.btcIndex.refreshPrice}
-      />
-    )
+    return null
   }
 }
 
@@ -34,10 +35,9 @@ BtcProvderChild.contextTypes = {
   btcIndex: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
-    buy: btcIndexPropType,
-    sell: btcIndexPropType,
+    value: PropTypes.arrayOf(btcIndexPropType),
     error: PropTypes.bool,
     errorMsg: PropTypes.string,
-    refreshPrice: PropTypes.func.isRequired,
+    reload: PropTypes.func.isRequired,
   })
 }

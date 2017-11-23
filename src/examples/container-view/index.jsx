@@ -40,14 +40,16 @@ export default class ContainerBtcIndex extends React.Component {
   render() {
     const { buy, sell, loaded, loading, error, errorMsg } = this.state
 
-    if (error) {
-      return <ErrorDisplay message={errorMsg} />
-    }
     if (loading && !loaded) {
       return <LoadingIndicator />;
     }
+
+    if (error) {
+      return <ErrorDisplay message={errorMsg} />
+    }
+
     if (loaded) {
-      return <DisplayBtcPrice buy={buy} sell={sell} onClick={this.refreshPrice} />
+      return <DisplayBtcPrice buy={buy} sell={sell} refresh={this.refreshPrice} loading={loading} />
     }
 
     // notice that this state is possible unless we initialize with { loading: true }

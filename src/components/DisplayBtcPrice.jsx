@@ -9,16 +9,20 @@ const btcIndexPropType = PropTypes.shape({
 
 
 DisplayBtcPrice.propTypes = {
+  loading: PropTypes.bool.isRequired,
   buy: btcIndexPropType,
   sell: btcIndexPropType,
-  onClick: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
 }
 
-export function DisplayBtcPrice({ buy, sell, onClick }) {
+export function DisplayBtcPrice({ buy, sell, loading, refresh }) {
   return (
-    <div style={{ cursor: 'pointer'}} onClick={onClick}>
+    <div style={{ cursor: 'pointer'}} onClick={refresh}>
       <p>Buy: {buy.amount} {buy.currency}</p>
       <p>Sell: {sell.amount} {sell.currency}</p>
+      {loading && (
+        <p className="f6">loading..</p>
+      )}
   </div>
   );
 }

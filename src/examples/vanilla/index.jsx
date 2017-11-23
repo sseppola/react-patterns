@@ -30,20 +30,24 @@ export default class VanillaBtcIndex extends React.Component {
   render() {
     const { buy, sell, loaded, loading, error, errorMsg } = this.state
 
+    if (loading && !loaded) {
+      return <div className="bg-blue white tc pa3"><p>loading...</p></div>;
+    }
+
+    if (error) {
+      return <p className="red">{errorMsg}</p>
+    }
+
     if (loaded) {
       return (
         <div className="pointer" onClick={this.refreshPrice}>
           <p>Buy: {buy.amount} {buy.currency}</p>
           <p>Sell: {sell.amount} {sell.currency}</p>
+          {loading && (
+            <p className="f6">loading..</p>
+          )}
         </div>
       )
-    }
-
-    if (loading) {
-      return <div className="bg-blue white tc pa3"><p>loading...</p></div>;
-    }
-    if (error) {
-      return <p className="red">{errorMsg}</p>
     }
 
     return null

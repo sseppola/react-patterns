@@ -14,16 +14,14 @@ function fetchPrices() {
   ])
 }
 
-function _HocBtcIndex({ btcIndex: { buy, sell, reload }}) {
-  return <DisplayBtcPrice buy={buy} sell={sell} onClick={reload} />
+function _HocBtcIndex({ value: [buy, sell], reload, loading }) {
+  return <DisplayBtcPrice buy={buy} sell={sell} refresh={reload} loading={loading} />
 }
 
 _HocBtcIndex.propTypes = {
-  btcIndex: PropTypes.shape({
-    buy: btcIndexPropType.isRequired,
-    sell: btcIndexPropType.isRequired,
-    reload: PropTypes.func.isRequired,
-  }).isRequired
+  loading: PropTypes.bool.isRequired,
+  reload: PropTypes.func.isRequired,
+  value: PropTypes.arrayOf(btcIndexPropType),
 }
 
 const enhance = compose(

@@ -50,25 +50,22 @@ export default function FetchHoc(fetchFn) {
 
       render() {
         const { loading, loaded, error, errorMsg } = this.state
-
-        if (error) {
-          return <ErrorDisplay message={errorMsg} />
-        }
+        
         if (loading && !loaded) {
           return <LoadingIndicator />
         }
 
+        if (error) {
+          return <ErrorDisplay message={errorMsg} />
+        }
+
         if (loaded) {
-          const { value: [buy, sell] , ...forwardProps } = this.state
           return (
             <WrappedComponent
               {...this.props}
-              btcIndex={{
-                ...forwardProps,
-                buy,
-                sell,
-                reload: this._fetchData
-              }}
+              value={this.state.value}
+              loading={this.state.loading}
+              reload={this._fetchData}
             />
           )
         }

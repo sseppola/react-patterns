@@ -16,8 +16,8 @@ export default function RenderComponentBtcIndex () {
   return (
     <FetchRenderComponent
       fetchFn={fetchPrices}
-      render={([buy, sell], { reload }) => (
-        <DisplayBtcPrice buy={buy} sell={sell} onClick={reload} />
+      render={([buy, sell], { reload, loading }) => (
+        <DisplayBtcPrice buy={buy} sell={sell} refresh={reload} loading={loading} />
       )}
     />
   )

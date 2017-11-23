@@ -1,16 +1,6 @@
 import React, { Children } from 'react'
 import PropTypes from 'prop-types'
 
-import * as coinApi from '../../api'
-import btcIndexPropType from '../../propTypes/btcIndexPropType'
-
-function fetchPrices() {
-  return Promise.all([
-    coinApi.queryBuyPrice(),
-    coinApi.querySellPrice()
-  ])
-}
-
 
 export default class BtcProvider extends React.Component {
   constructor(props) {
@@ -18,34 +8,32 @@ export default class BtcProvider extends React.Component {
     this.state = {
       loaded: false,
       loading: false,
-      buy: null,
-      sell: null,
+      value: null,
       error: null,
       errorMsg: null,
     }
-    this.refreshPrice = this.refreshPrice.bind(this)
+    this.reload = this.reload.bind(this)
   }
 
   componentDidMount() {
-    this.refreshPrice()
+    this.reload()
   }
 
   getChildContext() {
     const btcIndex = {
       loading: this.state.loading,
       loaded: this.state.loaded,
-      buy: this.state.buy,
-      sell: this.state.sell,
-      refreshPrice: this.refreshPrice,
+      value: this.state.value,
+      reload: this.reload,
     }
     return { btcIndex }
   }
 
-  refreshPrice() {
+  reload() {
     this.setState({ loading: true })
-    fetchPrices()
-    .then(([buy, sell]) => {
-      this.setState({ buy , sell, loaded: true, loading: false  })
+    this.props.fetchFn()
+    .then((value) => {
+      this.setState({ value, loaded: true, loading: false  })
     })
     .catch((errorMsg) => {
       this.setState({ error: true, errorMsg })
@@ -58,6 +46,7 @@ export default class BtcProvider extends React.Component {
 }
 
 BtcProvider.propTypes = {
+  fetchFn: PropTypes.func.isRequired,
   children: PropTypes.node,
 }
 
@@ -65,10 +54,9 @@ BtcProvider.childContextTypes = {
   btcIndex: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
-    buy: btcIndexPropType,
-    sell: btcIndexPropType,
+    value: PropTypes.any,
     error: PropTypes.bool,
     errorMsg: PropTypes.string,
-    refreshPrice: PropTypes.func.isRequired,
+    reload: PropTypes.func.isRequired,
   }).isRequired
 }

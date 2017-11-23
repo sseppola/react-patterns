@@ -9,7 +9,7 @@ export default class FetchOrCatch extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: true,
+      loading: true,
       value: null,
       error: null,
     }
@@ -27,21 +27,22 @@ export default class FetchOrCatch extends React.Component {
 
   _fetchData() {
     this.setState(Object.assign({}, this.state, {
-      isLoading: true,
+      loading: true,
     }))
 
     this.props.fetchFn()
     .then(result => {
       this._setState(() => ({
         value: result,
-        isLoading: false,
-        error: null,
+        loading: false,
+        error: false,
       }))
     })
-    .catch(err => {
+    .catch(errorMsg => {
       this._setState(() => ({
-        isLoading: false,
-        error: err,
+        loading: false,
+        error: true,
+        errorMsg,
       }))
     })
   }
@@ -51,17 +52,18 @@ export default class FetchOrCatch extends React.Component {
   }
 
   render() {
-    const { isLoading, value, error } = this.state
+    const { loading, value, error } = this.state
+
+    if (loading && !value) {
+      return this.props.renderLoading()
+    }
 
     if (error) {
       return this.props.renderError(error)
     }
 
-    if (isLoading && !value) {
-      return this.props.renderLoading()
-    }
 
-    return this.props.render(value, { reload: this._fetchData, isLoading })
+    return this.props.render(value, { reload: this._fetchData, loading })
   }
 }
 
