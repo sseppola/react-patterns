@@ -2,9 +2,6 @@ import React, { Children } from 'react'
 import PropTypes from 'prop-types'
 
 import * as coinApi from '../../api'
-import { DisplayBtcPrice } from '../../components/DisplayBtcPrice'
-import { ErrorDisplay } from '../../components/ErrorDisplay'
-import { LoadingIndicator } from '../../components/LoadingIndicator'
 import btcIndexPropType from '../../propTypes/btcIndexPropType'
 
 function fetchPrices() {
@@ -15,7 +12,7 @@ function fetchPrices() {
 }
 
 
-export class BtcProvider extends React.Component {
+export default class BtcProvider extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -74,50 +71,4 @@ BtcProvider.childContextTypes = {
     errorMsg: PropTypes.string,
     refreshPrice: PropTypes.func.isRequired,
   }).isRequired
-}
-
-
-
-
-export class BtcProvderChild extends React.Component {
-  render() {
-    if (this.context.btcIndex.loading && !this.context.btcIndex.loaded) {
-      return <LoadingIndicator />;
-    }
-    if (this.context.btcIndex.error) {
-      return <ErrorDisplay message={this.context.btcIndex.errorMsg} />
-    }
-    if (!this.context.btcIndex.loaded) {
-      return null
-    }
-
-    return (
-      <DisplayBtcPrice
-        buy={this.context.btcIndex.buy}
-        sell={this.context.btcIndex.sell}
-        onClick={this.context.btcIndex.refreshPrice}
-      />
-    )
-  }
-}
-
-BtcProvderChild.contextTypes = {
-  btcIndex: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    loaded: PropTypes.bool.isRequired,
-    buy: btcIndexPropType,
-    sell: btcIndexPropType,
-    error: PropTypes.bool,
-    errorMsg: PropTypes.string,
-    refreshPrice: PropTypes.func.isRequired,
-  })
-}
-
-
-export default function ProviderBtcIndex() {
-  return (
-    <BtcProvider>
-      <BtcProvderChild />
-    </BtcProvider>
-  )
 }
