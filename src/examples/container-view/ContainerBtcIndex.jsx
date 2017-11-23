@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import * as coinApi from '../../api'
 import { DisplayBtcPrice } from '../../components/DisplayBtcPrice'
@@ -9,7 +8,14 @@ import { LoadingIndicator } from '../../components/LoadingIndicator'
 export class ContainerBtcIndex extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { loaded: false, loading: false }
+    this.state = {
+      loaded: false,
+      loading: false,
+      buy: null,
+      sell: null,
+      error: null,
+      errorMsg: null,
+    }
     this.refreshPrice = this.refreshPrice.bind(this)
   }
 
@@ -34,15 +40,14 @@ export class ContainerBtcIndex extends React.Component {
   render() {
     const { buy, sell, loaded, loading, error, errorMsg } = this.state
 
-    if (loaded) {
-      return <DisplayBtcPrice buy={buy} sell={sell} onClick={this.refreshPrice} />
-    }
-
-    if (loading) {
-      return <LoadingIndicator />;
-    }
     if (error) {
       return <ErrorDisplay message={errorMsg} />
+    }
+    if (loading && !loaded) {
+      return <LoadingIndicator />;
+    }
+    if (loaded) {
+      return <DisplayBtcPrice buy={buy} sell={sell} onClick={this.refreshPrice} />
     }
 
     // notice that this state is possible unless we initialize with { loading: true }

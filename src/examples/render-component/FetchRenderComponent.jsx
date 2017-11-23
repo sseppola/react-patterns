@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { LoadingIndicator } from './LoadingIndicator'
-import { ErrorDisplay } from './ErrorDisplay'
-
-
+import { LoadingIndicator } from '../../components/LoadingIndicator'
+import { ErrorDisplay } from '../../components/ErrorDisplay'
 
 
 export default class FetchOrCatch extends React.Component {

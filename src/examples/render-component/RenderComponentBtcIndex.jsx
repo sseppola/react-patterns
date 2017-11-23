@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import * as coinApi from '../../api'
-import FetchRenderComponent from '../../components/FetchRenderComponent'
+import FetchRenderComponent from './FetchRenderComponent'
 import { DisplayBtcPrice } from '../../components/DisplayBtcPrice'
 
 function fetchPrices() {
