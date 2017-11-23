@@ -7,8 +7,8 @@ import { DisplayBtcPrice } from '../../components/DisplayBtcPrice'
 
 function fetchPrices() {
   return Promise.all([
-    coinApi.queryBtcBuyPrice(),
-    coinApi.queryBtcSellPrice()
+    coinApi.queryBuyPrice(),
+    coinApi.querySellPrice()
   ])
 }
 

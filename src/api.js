@@ -2,7 +2,7 @@ function wait(delay) {
   return new Promise(resolve => setTimeout(resolve, delay))
 }
 
-export async function queryBtcBuyPrice(crypto = 'BTC', currency = 'USD') {
+export async function queryBuyPrice(crypto = 'BTC', currency = 'USD') {
   const url = `https://api.coinbase.com/v2/prices/${crypto}-${currency}/buy`
   await wait(500)
 
@@ -17,7 +17,7 @@ export async function queryBtcBuyPrice(crypto = 'BTC', currency = 'USD') {
   }
 }
 
-export async function queryBtcSellPrice(crypto = 'BTC', currency = 'USD') {
+export async function querySellPrice(crypto = 'BTC', currency = 'USD') {
   const url = `https://api.coinbase.com/v2/prices/${crypto}-${currency}/sell`
   await wait(500)
 

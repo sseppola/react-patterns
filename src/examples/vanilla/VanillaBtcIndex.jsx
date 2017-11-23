@@ -17,8 +17,8 @@ export class VanillaBtcIndex extends React.Component {
   refreshPrice() {
     this.setState({ loading: true })
     Promise.all([
-      coinApi.queryBtcBuyPrice(),
-      coinApi.queryBtcSellPrice()
+      coinApi.queryBuyPrice(),
+      coinApi.querySellPrice()
     ])
     .then(([buy, sell]) => {
       this.setState({ buy , sell, loaded: true, loading: false  })
