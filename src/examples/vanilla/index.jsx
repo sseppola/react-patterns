@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as coinApi from '../../api'
 
-export class VanillaBtcIndex extends React.Component {
+export default class VanillaBtcIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = { loaded: false, loading: false }

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
 
-import { VanillaBtcIndex } from './examples/vanilla/VanillaBtcIndex'
-import { ContainerBtcIndex } from './examples/container-view/ContainerBtcIndex'
-import { HocBtcIndex } from './examples/hoc/HocBtcIndex'
-import { RenderComponentBtcIndex } from './examples/render-component/RenderComponentBtcIndex'
-import ProviderBtcIndex from './examples/provider/ProviderBtcIndex'
+import VanillaBtcIndex from './examples/vanilla'
+import ContainerBtcIndex from './examples/container-view'
+import HocBtcIndex from './examples/hoc'
+import RenderComponentBtcIndex from './examples/render-component'
+import ProviderBtcIndex from './examples/provider'
 
 class App extends Component {
   render() {

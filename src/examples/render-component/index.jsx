@@ -12,7 +12,7 @@ function fetchPrices() {
 }
 
 
-export function RenderComponentBtcIndex () {
+export default function RenderComponentBtcIndex () {
   return (
     <FetchRenderComponent
       fetchFn={fetchPrices}

@@ -5,7 +5,7 @@ import { DisplayBtcPrice } from '../../components/DisplayBtcPrice'
 import { ErrorDisplay } from '../../components/ErrorDisplay'
 import { LoadingIndicator } from '../../components/LoadingIndicator'
 
-export class ContainerBtcIndex extends React.Component {
+export default class ContainerBtcIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

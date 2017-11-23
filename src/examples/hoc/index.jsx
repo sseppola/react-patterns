@@ -30,4 +30,6 @@ const enhance = compose(
   FetchHoc(fetchPrices)
 )
 
-export const HocBtcIndex = enhance(_HocBtcIndex)
+const HocBtcIndex = enhance(_HocBtcIndex)
+
+export default HocBtcIndex
