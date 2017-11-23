@@ -1,0 +1,39 @@
+{
+  "rules": {
+    "indent": [0, 2],
+    "quotes": [2, "single"],
+    "no-undef": [2, { "typeof": true }],
+    "no-unused-vars": [2, {}],
+    "linebreak-style": [2, "unix"],
+    "semi": [0],
+    "comma-dangle": [0],
+    "react/prop-types": [2, {}],
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-no-target-blank": 2,
+    "react/jsx-no-undef": 2,
+    "react/jsx-no-duplicate-props": 1,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/no-direct-mutation-state": 2,
+    "react/no-unknown-property": 1
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true,
+    "mocha": true
+  },
+  "extends": "eslint:recommended",
+  "plugins": [
+    "react"
+  ]
+}
