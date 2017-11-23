@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as coinApi from '../../api'
-import { DisplayBtcPrice } from '../../DisplayBtcPrice'
+import { DisplayBtcPrice } from '../../components/DisplayBtcPrice'
+import { ErrorDisplay } from '../../components/ErrorDisplay'
+import { LoadingIndicator } from '../../components/LoadingIndicator'
 
-export class VanillaBtcIndex extends React.Component {
+export class ContainerBtcIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = { loaded: false, loading: false }
@@ -33,16 +35,17 @@ export class VanillaBtcIndex extends React.Component {
     const { buy, sell, loaded, loading, error, errorMsg } = this.state
 
     if (loaded) {
-      return <DisplayBtcPrice buy={buy} sell={sell} refreshPrice={onClick={this.refreshPrice}} />
+      return <DisplayBtcPrice buy={buy} sell={sell} onClick={this.refreshPrice} />
     }
 
     if (loading) {
-      return <p>loading...</p>;
+      return <LoadingIndicator />;
     }
     if (error) {
-      return <p style={{ color: 'red' }}>{errorMsg}</p>
+      return <ErrorDisplay message={errorMsg} />
     }
 
+    // notice that this state is possible unless we initialize with { loading: true }
     return null
   }
 }

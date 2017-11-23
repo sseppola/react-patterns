@@ -33,7 +33,7 @@ export class VanillaBtcIndex extends React.Component {
 
     if (loaded) {
       return (
-        <div style={{ cursor: 'pointer'}} onClick={this.refreshPrice}>
+        <div className="pointer" onClick={this.refreshPrice}>
           <p>Buy: {buy.amount} {buy.currency}</p>
           <p>Sell: {sell.amount} {sell.currency}</p>
         </div>
@@ -41,10 +41,10 @@ export class VanillaBtcIndex extends React.Component {
     }
 
     if (loading) {
-      return <p>loading...</p>;
+      return <div className="bg-blue white tc pa3"><p>loading...</p></div>;
     }
     if (error) {
-      return <p style={{ color: 'red' }}>{errorMsg}</p>
+      return <p className="red">{errorMsg}</p>
     }
 
     return null

@@ -1,8 +1,13 @@
-export async function queryBtcBuyPrice(currency = 'USD') {
-  const url = `https://api.coinbase.com/v2/prices/BTC-${currency}/buy`
+function wait(delay) {
+  return new Promise(resolve => setTimeout(resolve, delay))
+}
+
+export async function queryBtcBuyPrice(crypto = 'BTC', currency = 'USD') {
+  const url = `https://api.coinbase.com/v2/prices/${crypto}-${currency}/buy`
+  await wait(500)
 
   try {
-    const res = await fetch(url)
+    const res = await fetch(url, { headers: { 'CB-VERSION': '2015-04-08' }})
     if (!res.ok) {
       return Promise.reject('Failed to get BTC buy price')
     }
@@ -12,11 +17,12 @@ export async function queryBtcBuyPrice(currency = 'USD') {
   }
 }
 
-export async function queryBtcSellPrice(currency = 'USD') {
-  const url = `https://api.coinbase.com/v2/prices/BTC-${currency}/sell`
+export async function queryBtcSellPrice(crypto = 'BTC', currency = 'USD') {
+  const url = `https://api.coinbase.com/v2/prices/${crypto}-${currency}/sell`
+  await wait(500)
 
   try {
-    const res = await fetch(url)
+    const res = await fetch(url, { headers: { 'CB-VERSION': '2015-04-08' }})
     if (!res.ok) {
       return Promise.reject('Failed to get BTC buy price')
     }
