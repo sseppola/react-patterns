@@ -17,7 +17,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
 
-        <section className="tc flex flex-wrap mw8">
+        <section className="tc flex flex-wrap mw8 center">
 
           <div className="w-50 ba pa3">
             <h3>Vanilla</h3>
